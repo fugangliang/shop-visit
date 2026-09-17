@@ -1,6 +1,6 @@
 /* cache-first（mansion-patrol と同型）。更新は tools/bump_version.py で app.js と同時に上げる */
-const VERSION = 'shop-visit-v2026-09-17.2';
-const ASSETS = ['./', 'index.html', 'style.css', 'app.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png'];
+const VERSION = 'shop-visit-v2026-09-17.3';
+const ASSETS = ['./', 'index.html', 'style.css', 'app.js', 'manifest.webmanifest', 'open_dates.json', 'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));

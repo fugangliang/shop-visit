@@ -5,7 +5,7 @@
  */
 'use strict';
 
-const APP_VERSION = 'v2026-09-17.2';
+const APP_VERSION = 'v2026-09-17.3';
 const API = 'https://hiiragi-hd.jp/wp-json/microcms-cache/v1/data/';
 const MASTER_TTL_MS = 24 * 3600 * 1000;
 const EXPORT_FORMAT = 'shop-visit-records-v1';
@@ -152,14 +152,31 @@ async function refreshMasterIfStale() {
 
 /* ---------- 状態 ---------- */
 const S = {
-  tab: 'visit', master: null, masterErr: null, stores: [], visits: [], meta: {}, storeMeta: {},
+  tab: 'visit', master: null, masterErr: null, stores: [], visits: [], meta: {}, storeMeta: {}, openDefaults: {},
   shop: null, draft: null,
   q: '', fCompany: null, fBrand: null, fPref: null, sortStale: false, limit: PAGE, covOpen: false,
   addingManual: false, photoTag: '店内',
   recFilterCo: null,
 };
 
-function openDateOf(shopId) { return (S.storeMeta[shopId] || {}).openDate || ''; }
+/* オープン日: ユーザー入力（store_meta）＞ 同梱既定値（open_dates.json＝賃貸借契約一覧等から生成） */
+function openInfo(shopId) {
+  const u = S.storeMeta[shopId];
+  if (u && u.openDate) return { openDate: u.openDate, acquiredDate: '', note: '', source: 'user' };
+  const d = S.openDefaults[shopId];
+  if (d && d.openDate) return { openDate: d.openDate, acquiredDate: d.acquiredDate || '', note: d.note || '', source: d.source || 'default' };
+  return { openDate: '', acquiredDate: '', note: '', source: '' };
+}
+function openDateOf(shopId) { return openInfo(shopId).openDate; }
+const SOURCE_LABEL = { user: '手入力', lease: '賃貸借契約一覧', sales: '売上一覧', news: '公式ニュース', default: '既定値' };
+async function loadOpenDefaults() {
+  try {
+    const r = await fetch('open_dates.json', { cache: 'no-cache' });
+    if (!r.ok) return;
+    const j = await r.json();
+    if (j && j.format === 'shop-visit-open-dates-v1') S.openDefaults = j.dates || {};
+  } catch { /* オフライン等は無視（SWキャッシュがあれば返る） */ }
+}
 async function setOpenDate(shopId, openDate) {
   const rec = { ...(S.storeMeta[shopId] || {}), shopId, openDate: openDate || '' };
   S.storeMeta[shopId] = rec;
@@ -506,8 +523,12 @@ function renderForm(root) {
   od.onchange = async () => { await setOpenDate(s.id, od.value); d.openDate = od.value; toast(od.value ? 'オープン日を保存: ' + fmtDate(od.value) : 'オープン日を削除'); };
   odRow.append(odLbl, od);
   attr.append(odRow);
-  const odv = openDateOf(s.id);
-  if (odv) attr.append(el('div', 'set-note', `開店から ${daysSince(odv)} 日`));
+  const oi = openInfo(s.id);
+  if (oi.openDate) {
+    const bits = [`開店から ${daysSince(oi.openDate)} 日`, `出典: ${SOURCE_LABEL[oi.source] || oi.source}`];
+    if (oi.note) bits.push(oi.note);
+    attr.append(el('div', 'set-note', bits.join(' · ') + (oi.source !== 'user' ? '（変更する場合は上の欄を編集）' : '')));
+  } else attr.append(el('div', 'set-note', 'オープン日は未登録。分かれば上の欄に入力（この端末に保存・マスター更新でも保持）'));
 
   // 過去の訪問（複数回訪問の履歴）
   const past = S.visits.filter(v => v.shopId === s.id).sort((a, b) => b.ts.localeCompare(a.ts));
@@ -644,7 +665,7 @@ function renderSettings(root) {
     try { const mm = await fetchMaster(); toast(`${mm.counts.shop}店を取得`); S.masterErr = null; render(); }
     catch (e) { toast('取得失敗: ' + e.message); fetchBtn.disabled = false; }
   };
-  b1.append(fetchBtn, el('div', 'set-note', `起動時に24時間経過していれば自動更新。閉店で公式から消えた店舗の記録は店名を保持したまま残る。オープン日は各店舗の記録画面で入力（登録済 ${Object.values(S.storeMeta).filter(m => m.openDate).length}店・マスター更新でも保持）。`));
+  b1.append(fetchBtn, el('div', 'set-note', `起動時に24時間経過していれば自動更新。閉店で公式から消えた店舗の記録は店名を保持したまま残る。オープン日: 同梱既定値 ${Object.keys(S.openDefaults).length}店（賃貸借契約一覧等から生成）＋手入力 ${Object.values(S.storeMeta).filter(m => m.openDate).length}店。記録画面で上書き可。`));
   const manual = S.stores.filter(s => s.manual);
   if (manual.length) {
     b1.append(el('div', 'field-label', `手入力店舗（${manual.length}）`));
@@ -772,6 +793,7 @@ document.querySelectorAll('.nav button').forEach(b => {
   S.visits = visits; S.stores = stores; S.master = master || null;
   S.storeMeta = Object.fromEntries(sm.map(m => [m.shopId, m]));
   S.meta.lastExportAt = lastExp ? lastExp.value : null;
+  await loadOpenDefaults();
   render();
   refreshMasterIfStale();
   window.addEventListener('online', refreshMasterIfStale);

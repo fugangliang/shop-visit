@@ -18,7 +18,7 @@
 
 ## コミット禁止（.gitignore 済み）
 
-- `data/` — エクスポートされた訪問記録（写真・面談内容・店舗課題を含む。機密）
+- `data/` — エクスポートされた訪問記録（写真・店舗課題を含む。機密）と `data/sources/`（賃貸借契約一覧・売上一覧の xlsx＝機密）
 - `docs/_test.html` — 一時テストページ
 
 ## 構成
@@ -26,15 +26,32 @@
 ```
 docs/            アプリ本体（公開）: index.html / app.js / style.css / sw.js / manifest / icons
 tools/
-  bump_version.py   app.js APP_VERSION と sw.js VERSION を同時に更新（二重管理の解消）
-  make_icons.py     アイコン生成（依存なし）
+  bump_version.py      app.js APP_VERSION と sw.js VERSION を同時に更新（二重管理の解消）
+  make_icons.py        アイコン生成（依存なし）
+  fetch_open_dates.py  docs/open_dates.json（オープン日の既定値）を生成。/usr/bin/python3 で実行（openpyxl）
+docs/open_dates.json  オープン日の既定値（shopId→{openDate, acquiredDate, note, source, label}。日付のみ・公開可）
+data/sources/    賃貸借契約一覧・売上一覧の xlsx（非公開・fetch_open_dates.py の入力）
 data/exports/    iPhoneからエクスポートした記録JSONの置き場（非公開）
 ```
 
 ## データスキーマ
 
 IndexedDB `shop-visit` v2: `visits`（keyPath id, index ts/shopId）・`stores`（keyPath id, index companyId）・`meta`（keyPath key: master / lastExportAt）・
-`store_meta`（keyPath shopId: `{ shopId, openDate:'YYYY-MM-DD' }`。オープン日は公式APIに無いためアプリ内で保持。マスター全件置換でも消えない）。
+`store_meta`（keyPath shopId: `{ shopId, openDate:'YYYY-MM-DD' }`。ユーザーが記録画面で入力したオープン日。マスター全件置換でも消えない）。
+
+### オープン日の情報源（優先順）
+
+| 優先 | 出典 | 所在 | 件数（2026-09-17） |
+|---|---|---|---|
+| 1 | ユーザー入力（store_meta） | 端末 IndexedDB | 記録画面で上書き |
+| 2 | `docs/open_dates.json`（同梱既定値） | `tools/fetch_open_dates.py` で生成 | 270/277店 |
+
+`open_dates.json` の生成元（`data/sources/`）: ①グループ全社賃貸借契約一覧 xlsx（5社全店・「店舗OPEN日初回営業開始日」「譲受店舗営業開始日」。
+店舗マスターと電話番号→郵便番号＋店名で突合。譲受店は当社営業開始日＝openDate・note「譲受店」）②ES売上一覧「オープン日(譲受日)」（補完）
+③ eatstyle.jp/news の「○○店 オープン」記事（記事日付＝オープン日・補完）。公式APIにオープン日は無い。
+**既定値なし7店**（賃貸借一覧に無い）: マヌカンピス 大丸福岡天神・高宮、ポポラマーマ 江別野幌・船橋・西船橋・ツイン21、31 武蔵小山店（MW）→ アプリで手入力。
+賃貸借一覧と売上一覧で日付が異なる9店は賃貸借一覧を採用（差分は生成スクリプトの出力に表示）。
+新しい賃貸借一覧を入手したら `data/sources/` に置いて再生成 → `bump_version.py` → commit/push。
 
 - 店舗（stores）: `{ id, name, label, brandIds[], brandNames[], companyId, companyName, pref, postal_code, address, phone, business_hours, image, updatedAt, manual }`
   手入力店舗は `id: 'm_…'`, `manual: true`。マスター更新時も残る。
@@ -70,8 +87,9 @@ IndexedDB `shop-visit` v2: `visits`（keyPath id, index ts/shopId）・`stores`�
 
 ## 現状ステータス（2026-09-17）
 
-- v2026-09-17.2 公開。RF指示で (1) 店舗ごとのオープン日（記録画面で入力・store_meta 保持・行と記録に表示・「開店からN日」）、
+- v2026-09-17.3 公開。オープン日の既定値 270店を同梱（RF指示: 公式ニュース→さらにDownloadsの店舗マスタ＝賃貸借契約一覧・売上一覧を確認して統合）。
+- v2026-09-17.2: RF指示で (1) 店舗ごとのオープン日（記録画面で入力・store_meta 保持・行と記録に表示・「開店からN日」）、
   (2) 店舗選択を①都道府県 ②業態 ③法人のドロップダウン（相互に絞り込み・件数付き）に変更、(3) 観察・対話・課題の各セクションを削除。
 - 複数回訪問: 1訪問=1レコード。記録画面に「過去の訪問 n回（今回は n+1回目）」と全履歴、店舗行に「最終訪問 N日前（n回）」。
-- [要確認] 分析成果物の保存先フォルダ／オープン日の一次情報源（HD側に店舗一覧があれば一括取込JSONをClaudeが生成）／
+- [要確認] 分析成果物の保存先フォルダ／オープン日なし7店の日付（上記）／譲受店のオープン日を「当社営業開始日」とするか「前運営者の開店日」とするか（現状は前者＝賃貸借一覧の値）／
   チップ辞書の語彙（実運用1〜2週で見直し）／近隣ソート（v1.1候補: 国土地理院 AddressSearch API・CORS可・キー不要）の要否／iPhone実機未確認。

@@ -1,0 +1,1902 @@
+{
+ "format": "shop-visit-open-dates-v1",
+ "generated_at": "2026-09-17",
+ "sources": {
+  "lease": "グループ全社賃貸借契約_202608_(8月末分).xlsx",
+  "sales": "ES売上一覧「オープン日(譲受日)」",
+  "news": "eatstyle.jp/news 記事日付"
+ },
+ "count": 270,
+ "dates": {
+  "34bak2c1d15": {
+   "openDate": "2026-04-27",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 六本松駅前"
+  },
+  "g7d_izf15ig": {
+   "openDate": "2026-04-24",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ラーメン魁力屋 イオンモール筑紫野"
+  },
+  "pw1gxsp8e": {
+   "openDate": "2026-03-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム OIMACHI TRACKS店"
+  },
+  "0ne7l76zyso": {
+   "openDate": "2026-01-30",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム サーティワン ららぽーと豊洲3"
+  },
+  "e8flrd3qyb0c": {
+   "openDate": "2025-12-12",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ラーメン魁力屋 イオンモール福岡"
+  },
+  "neksuguhfp9c": {
+   "openDate": "2025-11-20",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ラーメン魁力屋 イオンモール大牟田"
+  },
+  "7jz9xtov3n6": {
+   "openDate": "2021-12-01",
+   "acquiredDate": "2021-12-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "ペッパーランチ イオンモール福岡"
+  },
+  "dy2_2lnht2": {
+   "openDate": "2025-10-03",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンモール須坂店"
+  },
+  "bcvw1n494l": {
+   "openDate": "2025-10-03",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "北海道キッチンYOSHIMI イオンモール須坂店"
+  },
+  "6uzttf_d9ex": {
+   "openDate": "2025-09-30",
+   "acquiredDate": "2025-09-30",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモール福岡　フードフォレスト店"
+  },
+  "trwvv2prjpo4": {
+   "openDate": "2025-07-28",
+   "acquiredDate": "2025-07-28",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム サニー那の川"
+  },
+  "39bx5kr62un": {
+   "openDate": "2025-07-18",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンモール成田"
+  },
+  "up3i_h2ln2gv": {
+   "openDate": "2025-07-15",
+   "acquiredDate": "2025-07-15",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 和白丘店"
+  },
+  "okmkcjijav5": {
+   "openDate": "2025-05-15",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 アミュプラザおおいた"
+  },
+  "uu2850qvl2fm": {
+   "openDate": "2025-04-26",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ サンリブシティ小倉"
+  },
+  "6w9n0b2os": {
+   "openDate": "2025-03-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 大分別府店"
+  },
+  "ykd0lur271p": {
+   "openDate": "2025-03-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンモール甲府昭和"
+  },
+  "12f3r5y7n8c": {
+   "openDate": "2025-02-20",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "北海道キッチンYOSHIMI イオンモール熊本"
+  },
+  "s1ittcbd7qim": {
+   "openDate": "2024-11-29",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール福津"
+  },
+  "gqv_teq6g4": {
+   "openDate": "2016-07-20",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール熊本"
+  },
+  "9a601zk6w": {
+   "openDate": "2024-09-26",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム アミュプラザくまもと"
+  },
+  "ow491x0dnfa": {
+   "openDate": "2024-09-19",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム センテラス天文館"
+  },
+  "bpkytidwci": {
+   "openDate": "2023-03-01",
+   "acquiredDate": "2023-03-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "ヒナタノ蔵 天神イナチカ"
+  },
+  "85l1_blf0": {
+   "openDate": "2024-08-13",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 ららぽーと福岡"
+  },
+  "hkj1xtb902om": {
+   "openDate": "2024-06-11",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 木の葉モール橋本"
+  },
+  "s4sv-4u-lwru": {
+   "openDate": "2024-06-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "北海道キッチンYOSHIMI イオンモール宮崎"
+  },
+  "7qniqthd5u": {
+   "openDate": "2024-04-10",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ラーメン魁力屋 イオンモール宮崎"
+  },
+  "h8cj6wr60ib": {
+   "openDate": "2024-04-17",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンモール太田"
+  },
+  "kp61uyxma_k": {
+   "openDate": "2018-03-13",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "いきなりステーキ イオンモール宮崎"
+  },
+  "p13pdrb63m0g": {
+   "openDate": "2024-03-14",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 ららぽーと富士見"
+  },
+  "0zl7q-wa9y1": {
+   "openDate": "2024-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 アミュプラザ長崎"
+  },
+  "exftlsphw92": {
+   "openDate": "2005-05-16",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンモール宮崎"
+  },
+  "1e-lhqdp_g": {
+   "openDate": "2016-04-27",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ヒナタノ蔵 JRJP博多ビル"
+  },
+  "sa_gc1_wlu1": {
+   "openDate": "2023-12-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ラーメン魁力屋 イオンモールKAGOSHIMA BAY"
+  },
+  "og7vdy_d3qxa": {
+   "openDate": "2023-08-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ラーメン魁力屋 ゆめタウン久留米"
+  },
+  "gn319m27nyf": {
+   "openDate": "2023-07-26",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 おのだサンパーク"
+  },
+  "1k4lq5vv4": {
+   "openDate": "2023-07-19",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム アミュプラザ鹿児島"
+  },
+  "mf4oht1if6ql": {
+   "openDate": "2023-07-13",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 ゆめタウン光の森"
+  },
+  "uth6a_rf9u1d": {
+   "openDate": "2023-03-30",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール豊川"
+  },
+  "h7ubrhhja3wo": {
+   "openDate": "2023-03-24",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンタウン姶良"
+  },
+  "47g6hzl39y": {
+   "openDate": "2023-02-17",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビアードパパ 西鉄福岡駅"
+  },
+  "a5q4jq0e4": {
+   "openDate": "2022-12-23",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 都城"
+  },
+  "fcjq4vnq9": {
+   "openDate": "2022-10-07",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 那覇メインプレイス"
+  },
+  "p65xqdut5y": {
+   "openDate": "2022-08-04",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "BUNGA VILLAGE BUNGA VILLAGE"
+  },
+  "mdxsll_290": {
+   "openDate": "2022-07-07",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンモール福津"
+  },
+  "le9apd_n83": {
+   "openDate": "2022-06-27",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンモール都城駅前"
+  },
+  "61z65nw9f": {
+   "openDate": "2022-06-24",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ペッパーランチ イオンモール筑紫野"
+  },
+  "kigpvhclvm": {
+   "openDate": "2022-04-27",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 パークプレイス大分"
+  },
+  "ymnmxvh1d2v": {
+   "openDate": "2022-04-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "マヌカンピス・ケレス ジ アウトレット北九州"
+  },
+  "u1bt-uiuzpzo": {
+   "openDate": "2022-04-26",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 ジ アウトレット北九州"
+  },
+  "plcoknn34m04": {
+   "openDate": "2022-04-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム ららぽーと福岡"
+  },
+  "5zczx3xoz": {
+   "openDate": "2022-04-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 センテラス天文館"
+  },
+  "xqbts5byt": {
+   "openDate": "2022-03-18",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 長崎駅"
+  },
+  "6um3emk9i": {
+   "openDate": "2021-10-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンモール福岡"
+  },
+  "eltsrssha": {
+   "openDate": "2021-10-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 コクーンシティ"
+  },
+  "ubxir864jb5l": {
+   "openDate": "2021-10-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 ゆめタウン久留米"
+  },
+  "wfqp65hiki8": {
+   "openDate": "2021-05-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール川口"
+  },
+  "3wsu_sbgd": {
+   "openDate": "2021-04-23",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 鹿児島ライカ"
+  },
+  "qvcj_1g866w": {
+   "openDate": "2021-03-19",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンモール直方"
+  },
+  "ze0j7tqd0ylm": {
+   "openDate": "2021-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 浦添パルコシティ"
+  },
+  "unu4eug7m3e": {
+   "openDate": "2014-04-18",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 パークプレイス大分"
+  },
+  "zdvldow18wl": {
+   "openDate": "2023-08-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 宮崎"
+  },
+  "lay1dyz6x": {
+   "openDate": "2020-09-11",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 鳥栖プレミアムアウトレット"
+  },
+  "1rfy4djjjq_k": {
+   "openDate": "2019-04-26",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "いきなりステーキ イオンタウン姶良"
+  },
+  "x0n5pr185": {
+   "openDate": "2019-02-23",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ペッパーランチ イオンモール都城駅前"
+  },
+  "zynpbko9y": {
+   "openDate": "2018-12-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ペッパーランチ イオンモール熊本"
+  },
+  "cobowk06a": {
+   "openDate": "2018-11-21",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム マークイズ福岡ももち"
+  },
+  "o3dmlido-n": {
+   "openDate": "2018-10-17",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "いきなりステーキ 鹿児島ベイサイド"
+  },
+  "mc00dkjq_d0": {
+   "openDate": "2018-07-20",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イトーヨーカドー大宮宮原"
+  },
+  "eqs-hoobdli": {
+   "openDate": "2018-07-20",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サンクゼール イオンモール倉敷"
+  },
+  "tqsxiyoky8kl": {
+   "openDate": "2018-06-12",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ペッパーランチ イオンモール福津"
+  },
+  "fz5d5a1gkt": {
+   "openDate": "2018-04-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サンクゼール ジ アウトレット広島"
+  },
+  "c8dz0our8p": {
+   "openDate": "2018-03-23",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "いきなりステーキ みらい長崎ココウォーク"
+  },
+  "gmqs1x5hq4": {
+   "openDate": "2018-03-13",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール宮崎"
+  },
+  "cgodgwnva1b6": {
+   "openDate": "2018-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "マヌカンピス イオンモール香椎浜"
+  },
+  "8a8-nvtgntdw": {
+   "openDate": "2017-11-23",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 アリオ川口"
+  },
+  "fyzqdt6c6t8r": {
+   "openDate": "2017-11-20",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール甲府昭和"
+  },
+  "po_f01l1ks3": {
+   "openDate": "2017-09-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 鹿児島吉野"
+  },
+  "74ch3yk_rub": {
+   "openDate": "2017-03-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 木の葉モール橋本"
+  },
+  "jq6qg6lr2u": {
+   "openDate": "2016-12-27",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "いきなりステーキ イオンモールKAGOSHIMA BAY"
+  },
+  "dvgza6gjzv5": {
+   "openDate": "2016-11-18",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サンクゼール イオンモール羽生"
+  },
+  "qzzv-p4_7n": {
+   "openDate": "2016-07-15",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビアードパパ イオンモール広島府中"
+  },
+  "7ui-ti4uzidv": {
+   "openDate": "2016-07-15",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール広島府中"
+  },
+  "hf87r5_xvvd": {
+   "openDate": "2016-06-15",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール浦和美園"
+  },
+  "8nq1abjfzw": {
+   "openDate": "2016-03-08",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンタウン姶良"
+  },
+  "p09zlcw9nda": {
+   "openDate": "2016-03-08",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビアードパパ イオンタウン姶良"
+  },
+  "2czwg9k3xa": {
+   "openDate": "2016-03-08",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンタウン姶良"
+  },
+  "xuvgqgd3cq": {
+   "openDate": "2003-03-19",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム モラージュ佐賀"
+  },
+  "4u_d1u7r9n": {
+   "openDate": "2004-04-17",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム キャナルシティ博多"
+  },
+  "52fu3_hqykgi": {
+   "openDate": "2005-05-16",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモール宮崎"
+  },
+  "82dy6vjpj": {
+   "openDate": "2006-10-27",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモール佐賀大和"
+  },
+  "sihb3q8acoid": {
+   "openDate": "2007-03-21",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモール香椎浜"
+  },
+  "giuq5kzcel7o": {
+   "openDate": "2009-08-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム トリアス久山"
+  },
+  "ctc1_1yp2c": {
+   "openDate": "2011-04-23",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオン大野城"
+  },
+  "25xmaj6rdmc": {
+   "openDate": "2012-04-06",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 宮崎大島"
+  },
+  "bdgy4494i9g": {
+   "openDate": "2013-02-22",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 熊本下通"
+  },
+  "l0djq0rtw1": {
+   "openDate": "2013-02-21",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオン甘木"
+  },
+  "vs8gt3pkxg7": {
+   "openDate": "2013-11-08",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオン小郡"
+  },
+  "zvs-5m9xv-m": {
+   "openDate": "2015-08-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム フレスポ鳥栖"
+  },
+  "5f8ri-ra2km": {
+   "openDate": "2018-08-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 野間大池"
+  },
+  "ht-ouiz6nbxv": {
+   "openDate": "2020-06-20",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 薩摩川内"
+  },
+  "zaaytw8er": {
+   "openDate": "2022-07-09",
+   "acquiredDate": "2022-07-09",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 南宮崎"
+  },
+  "nb0k0-905ci": {
+   "openDate": "2023-09-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモール福津"
+  },
+  "j93lszn7drw": {
+   "openDate": "2024-09-01",
+   "acquiredDate": "2024-09-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 武蔵浦和マーレ"
+  },
+  "6wcridw3qoj1": {
+   "openDate": "2024-09-01",
+   "acquiredDate": "2024-09-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 朝霞三原"
+  },
+  "il8vv3pzsjt7": {
+   "openDate": "2024-10-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモール与野"
+  },
+  "e7iql7nv4-s": {
+   "openDate": "2024-09-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオン入間"
+  },
+  "0bjhgg2wg": {
+   "openDate": "2024-10-01",
+   "acquiredDate": "2024-10-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム アトレ浦和"
+  },
+  "m71hy-uqo": {
+   "openDate": "2024-10-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモール春日部"
+  },
+  "k44o1rhfetw": {
+   "openDate": "2024-10-01",
+   "acquiredDate": "2024-10-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム エキア朝霞"
+  },
+  "joj09tppk_6i": {
+   "openDate": "2024-10-01",
+   "acquiredDate": "2024-10-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 春日部駅西口"
+  },
+  "sikce81wffro": {
+   "openDate": "2024-09-01",
+   "acquiredDate": "2024-09-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム ワカバウォーク"
+  },
+  "07rv59qfuef": {
+   "openDate": "2024-12-01",
+   "acquiredDate": "2024-12-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオン唐津"
+  },
+  "b5q425j4y": {
+   "openDate": "2024-12-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオン時津"
+  },
+  "01od3kjkq3": {
+   "openDate": "2024-12-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム させぼ五番街"
+  },
+  "ad_ls04145v": {
+   "openDate": "2025-11-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモール筑紫野"
+  },
+  "ih3amek8kej8": {
+   "openDate": "2025-11-01",
+   "acquiredDate": "2025-11-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモール大牟田"
+  },
+  "y4n83bxqh": {
+   "openDate": "2025-12-01",
+   "acquiredDate": "2025-12-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 有明プラザ"
+  },
+  "cak2ms6s0ax7": {
+   "openDate": "2015-02-21",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンモール筑紫野"
+  },
+  "d4p6py_lz6o": {
+   "openDate": "2010-04-08",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンモール熊本"
+  },
+  "aob6fm0c7x": {
+   "openDate": "2013-02-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 ゆめタウン佐賀"
+  },
+  "y27xfw0dep": {
+   "openDate": "2026-04-08",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビビン亭 イオンモールつくば"
+  },
+  "5cviuw_6n2": {
+   "openDate": "2008-11-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビアードパパ イオンモール都城駅前"
+  },
+  "dn2xh3dxty": {
+   "openDate": "2015-04-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビアードパパ イオンモール沖縄ライカム"
+  },
+  "s_3_y5hw3": {
+   "openDate": "2018-11-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビアードパパ イオンモール広島祇園"
+  },
+  "2hliz2o5zc-y": {
+   "openDate": "2023-05-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビアードパパ イオンモール福岡"
+  },
+  "a59hhd2ahc1z": {
+   "openDate": "2023-05-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビアードパパ イオンモール筑紫野"
+  },
+  "76xtlqw6m": {
+   "openDate": "2023-05-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビアードパパ レイリア大橋"
+  },
+  "87o_9ojcv": {
+   "openDate": "2023-08-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 KITTE博多"
+  },
+  "4h2hhnt9ndtw": {
+   "openDate": "2023-08-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 大橋"
+  },
+  "e8un8hh81_z": {
+   "openDate": "2023-08-01",
+   "acquiredDate": "2023-08-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "串カツ田中 マークイズ福岡ももち"
+  },
+  "0941lsuz_-o": {
+   "openDate": "2023-08-01",
+   "acquiredDate": "2023-08-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "串カツ田中 アミュプラザ小倉"
+  },
+  "txhfxznimgf9": {
+   "openDate": "2023-08-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 ウエストコート姪浜"
+  },
+  "aqlv-sqet": {
+   "openDate": "2023-08-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 中洲川端"
+  },
+  "v__e03pcs6h1": {
+   "openDate": "2023-08-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 福岡別府"
+  },
+  "6pkpp2whiku": {
+   "openDate": "2023-08-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 福岡天神"
+  },
+  "e1slc999hk": {
+   "openDate": "2023-09-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 薬院"
+  },
+  "sa8nv5-m6": {
+   "openDate": "2023-09-01",
+   "acquiredDate": "2023-09-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "串カツ田中 藤崎"
+  },
+  "6hu807m2i1w": {
+   "openDate": "2023-09-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "串カツ田中 西鉄久留米"
+  },
+  "qyk7m04q6u1y": {
+   "openDate": "2023-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "タイーム 丸の内"
+  },
+  "eaa90w7tp": {
+   "openDate": "2014-10-10",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール福岡"
+  },
+  "tbtd5lzq2n": {
+   "openDate": "2014-12-05",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール岡山"
+  },
+  "40ycfzonj8": {
+   "openDate": "2015-04-16",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 アミュプラザおおいた"
+  },
+  "l5m8t-mmu823": {
+   "openDate": "2015-04-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール沖縄ライカム"
+  },
+  "go48ti4pt": {
+   "openDate": "2019-10-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール太田"
+  },
+  "e-i8r_jzy": {
+   "openDate": "2022-04-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモール長久手"
+  },
+  "3vccxd-ez": {
+   "openDate": "2023-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 mozoワンダーシティ"
+  },
+  "c01ty_wpnta": {
+   "openDate": "2023-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "久世福商店 イオンモールナゴヤドーム前"
+  },
+  "ct5y7m6we": {
+   "openDate": "2024-09-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 川越ウニクス"
+  },
+  "rbvsj_w3xd": {
+   "openDate": "2024-09-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 南古谷ウニクス"
+  },
+  "lyq47qogl": {
+   "openDate": "2024-10-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 川越アトレ"
+  },
+  "mt38_mzki89": {
+   "openDate": "2024-10-01",
+   "acquiredDate": "2024-10-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 和光イトーヨーカドー"
+  },
+  "dyzy1085xj": {
+   "openDate": "2024-12-01",
+   "acquiredDate": "2024-12-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモール福岡伊都"
+  },
+  "jn8a0ji58y": {
+   "openDate": "2023-01-02",
+   "acquiredDate": "2026-08-01",
+   "note": "譲受 2026-08-01",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモール福岡"
+  },
+  "ye8bfji6n": {
+   "openDate": "2016-05-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム ゆめモール柳川"
+  },
+  "36ol0w1e9z": {
+   "openDate": "2015-09-17",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム ゆめマートさが"
+  },
+  "p18_wmatn3zi": {
+   "openDate": "2010-11-18",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム ベアーズモール清武"
+  },
+  "t6x_2c8gt": {
+   "openDate": "2006-08-04",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 都城"
+  },
+  "xwz8anzzbm7": {
+   "openDate": "2008-11-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモール都城駅前"
+  },
+  "oh7wku3esso0": {
+   "openDate": "2024-05-01",
+   "acquiredDate": "2024-05-01",
+   "note": "譲受店",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム イオンモールKAGOSHIMA BAY"
+  },
+  "554mxebk4cm": {
+   "openDate": "2013-09-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サンクゼール ゆめタウン佐賀"
+  },
+  "qjo0_5te8m-1": {
+   "openDate": "2014-11-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サンクゼール みらい長崎ココウォーク"
+  },
+  "fkysea_tpp9": {
+   "openDate": "2013-11-23",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サンクゼール イオンモールKAGOSHIMA BAY"
+  },
+  "rn1oqsebgv2": {
+   "openDate": "2015-11-06",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ おのだサンパーク"
+  },
+  "sxylie8557yu": {
+   "openDate": "2012-10-19",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イオンモール佐賀大和"
+  },
+  "q1k_x4dx1gm": {
+   "openDate": "2009-12-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ みらい長崎ココウォーク"
+  },
+  "coeentcut": {
+   "openDate": "2014-06-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イオンモール三光"
+  },
+  "2iamn8m-4j0": {
+   "openDate": "2012-02-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イオン延岡"
+  },
+  "g_9bpks9m": {
+   "openDate": "2009-01-21",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イオンモール宮崎"
+  },
+  "ov-p_ev0dd_6": {
+   "openDate": "2013-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 宮交シティ"
+  },
+  "29-uc0mv93": {
+   "openDate": "2008-11-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イオンモール都城駅前"
+  },
+  "gts6nqf913wc": {
+   "openDate": "2015-10-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ビアードパパ イオンモールKAGOSHIMA BAY"
+  },
+  "r3jw7toak": {
+   "openDate": "2007-10-02",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ブレッザカフェ イオンモールKAGOSHIMA BAY"
+  },
+  "p3d_-gn732u": {
+   "openDate": "2023-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "もつ鍋幸 JPタワーKITTE丸の内"
+  },
+  "4fmxcm_n-6": {
+   "openDate": "2023-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "レ ロジェ ビストロ ド ロア 京橋"
+  },
+  "0-v45p2n3lq": {
+   "openDate": "2019-02-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "マヌカンピス サンリブシティ小倉"
+  },
+  "c3ni2u_z8p": {
+   "openDate": "2025-03-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ガトーマヌカンピス 博多駅マイング店"
+  },
+  "nku68uhbp4": {
+   "openDate": "1998-07-12",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "マヌカンピス・ケレス 新宮"
+  },
+  "5xt1l_aqi5jz": {
+   "openDate": "1991-08-23",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "マヌカンピス・ケレス 田川"
+  },
+  "3sl2hbraaf6": {
+   "openDate": "1991-08-04",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "シャトー文雅 シャトー文雅"
+  },
+  "maf04fg18crp": {
+   "openDate": "2026-04-15",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イオンモール水戸内原"
+  },
+  "ti7x2nt2tk": {
+   "openDate": "2006-12-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 川口元郷"
+  },
+  "n9oz775a9t": {
+   "openDate": "2015-03-13",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 川越西口"
+  },
+  "gvpxpjvfqk": {
+   "openDate": "2010-03-10",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 川越クレアモール"
+  },
+  "2cew5nhjib": {
+   "openDate": "2025-06-06",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イオンモール上尾店"
+  },
+  "o2_tx6eqx": {
+   "openDate": "2002-04-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ あさか台"
+  },
+  "h83jh-4lt": {
+   "openDate": "2001-01-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 武蔵浦和"
+  },
+  "ozc8rhx3xm": {
+   "openDate": "2004-04-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ ステラタウン"
+  },
+  "t41x9_xs2k": {
+   "openDate": "2006-09-15",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 新所沢"
+  },
+  "woyilv6wowrf": {
+   "openDate": "2008-12-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 入間"
+  },
+  "u0_50j40fri2": {
+   "openDate": "2014-04-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ アリオ鷲宮"
+  },
+  "d_i70c5mioco": {
+   "openDate": "2010-03-19",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ ピオニウォーク東松山"
+  },
+  "dmxvojm2m3c": {
+   "openDate": "2023-11-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ アリオ蘇我"
+  },
+  "j-xw5g9fw6": {
+   "openDate": "2014-12-22",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イオンマリンピア"
+  },
+  "4f64ug_ix": {
+   "openDate": "2008-02-23",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 市川"
+  },
+  "6isxi_dz3": {
+   "openDate": "2010-03-17",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 本八幡"
+  },
+  "7wii_o_u-wfl": {
+   "openDate": "2000-10-12",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 妙典駅前"
+  },
+  "cjcewtyvxs1": {
+   "openDate": "2009-04-11",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ ダイエーいちかわコルトンプラザ"
+  },
+  "t6-q2h7fuv": {
+   "openDate": "2007-09-08",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ ユニモちはら台"
+  },
+  "q64rkpvbg8": {
+   "openDate": "2006-11-22",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ アクロスモール新鎌ヶ谷"
+  },
+  "ofblv5-prsdt": {
+   "openDate": "2022-06-30",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 松戸西口"
+  },
+  "qisn4gh1r": {
+   "openDate": "2007-06-15",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イオンフードスタイル新松戸"
+  },
+  "hl7okcl2j9": {
+   "openDate": "2005-03-31",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イトーヨーカドー四街道"
+  },
+  "my-zazwsd": {
+   "openDate": "1998-12-20",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 浦安"
+  },
+  "3vo30z1z0kt0": {
+   "openDate": "2018-11-22",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ ニューコースト新浦安"
+  },
+  "2g5vmafkdm": {
+   "openDate": "2003-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イオン新浦安"
+  },
+  "utzpjhj3g": {
+   "openDate": "2016-09-22",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 木更津"
+  },
+  "gd_k1a_y-at": {
+   "openDate": "2008-12-17",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 新八柱"
+  },
+  "wjvjx2ndv": {
+   "openDate": "2007-09-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 北小金"
+  },
+  "tl6cjs-02uai": {
+   "openDate": "2025-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ アピタ金沢文庫"
+  },
+  "a-s6s18j4nzj": {
+   "openDate": "2007-07-06",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イトーヨーカドー川崎"
+  },
+  "xycweud8rq27": {
+   "openDate": "2003-10-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 清瀬"
+  },
+  "02tjwh7grt": {
+   "openDate": "2002-08-02",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 西国分寺"
+  },
+  "d5bd2biwnye3": {
+   "openDate": "2003-12-06",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 千歳烏山"
+  },
+  "q5hpe5o1tc": {
+   "openDate": "2002-07-15",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 成城学園前"
+  },
+  "ppaltd5zx": {
+   "openDate": "2002-11-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 保谷"
+  },
+  "0yw_d8sai1": {
+   "openDate": "2003-07-11",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ ひばりヶ丘"
+  },
+  "96d4swg71a": {
+   "openDate": "2008-10-19",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 旗の台"
+  },
+  "n7ds3xb18c": {
+   "openDate": "2015-06-10",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 調布"
+  },
+  "7gxid5z_ydh": {
+   "openDate": "2003-07-02",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 蒲田"
+  },
+  "ua_266gqaq": {
+   "openDate": "2015-12-11",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 京急蒲田"
+  },
+  "g63gphgyv_ms": {
+   "openDate": "2019-11-29",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ エキアときわ台"
+  },
+  "h6q1jplv5": {
+   "openDate": "2000-11-16",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イトーヨーカドー木場"
+  },
+  "461j4zas5": {
+   "openDate": "2003-05-02",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 門前仲町"
+  },
+  "28x640numc3o": {
+   "openDate": "2016-07-13",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 二子玉川ライズ店"
+  },
+  "bvtxiqva2": {
+   "openDate": "2018-11-02",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 南砂町SCスナモ"
+  },
+  "rwnnztsv22": {
+   "openDate": "2003-02-21",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 平井"
+  },
+  "qoay8gr5k": {
+   "openDate": "2001-10-04",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 船堀トキビル"
+  },
+  "5b62tq1lo": {
+   "openDate": "2012-04-26",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ アリオ葛西"
+  },
+  "fvwejme-rx": {
+   "openDate": "1995-12-12",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 葛西駅前"
+  },
+  "dnpw75fwwxo0": {
+   "openDate": "2006-08-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 瑞江"
+  },
+  "6tv6f3g02": {
+   "openDate": "2014-10-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 北千住"
+  },
+  "olen8azdkxl": {
+   "openDate": "2016-07-09",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 綾瀬"
+  },
+  "bnx6tz0hkx": {
+   "openDate": "2009-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 曳舟"
+  },
+  "p-199d844": {
+   "openDate": "2005-03-03",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 花小金井"
+  },
+  "kigjh262si4": {
+   "openDate": "2004-04-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ_バル 町田"
+  },
+  "8mqg98xi7": {
+   "openDate": "2013-11-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ 堺筋本町"
+  },
+  "j_2kjovz4": {
+   "openDate": "2016-04-06",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イズミヤ福町"
+  },
+  "4ftgruws6a": {
+   "openDate": "2009-06-20",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ JR吹田"
+  },
+  "ek4ivd29s": {
+   "openDate": "2025-11-12",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ ソリオ宝塚"
+  },
+  "giqibuojv0": {
+   "openDate": "2026-07-17",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "ポポラマーマ イオンモール大牟田"
+  },
+  "1lv92w5oand": {
+   "openDate": "2008-11-11",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "和ぱすた　ぽぽらまーま ララガーデン川口"
+  },
+  "nr0t1aegdr12": {
+   "openDate": "2006-04-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "和ぱすた　ぽぽらまーま フレスポ八潮"
+  },
+  "bosvz1atvj": {
+   "openDate": "2001-12-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "和ぱすた　ぽぽらまーま 東久留米"
+  },
+  "yu8ye5s1ap": {
+   "openDate": "2010-06-02",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "和ぱすた　ぽぽらまーま アリオ北砂"
+  },
+  "z07w8ob7s": {
+   "openDate": "2006-03-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "和ぱすた　ぽぽらまーま フレスポ若葉台"
+  },
+  "h0xs3n9t2": {
+   "openDate": "2003-07-19",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 光が丘IMA店"
+  },
+  "ck9pudwm-y1": {
+   "openDate": "2010-07-23",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム アルカキット錦糸町店"
+  },
+  "9bmv_serfa": {
+   "openDate": "2006-04-19",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム olinas錦糸町店"
+  },
+  "ihjh4yzxi9j": {
+   "openDate": "2025-08-23",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 錦糸町マルイ店"
+  },
+  "n9bkqw2at1": {
+   "openDate": "2012-03-29",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム iTerrace落合南長崎店"
+  },
+  "vx0_e8n1n": {
+   "openDate": "2001-03-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 田無アスタ店"
+  },
+  "33o27rrlu5": {
+   "openDate": "2017-12-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 銀座INZ店"
+  },
+  "n-o_xv2389": {
+   "openDate": "2022-01-16",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム AKIBAトリム店"
+  },
+  "9_3t4lfsbxr": {
+   "openDate": "2025-08-06",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 都立大学東急ストア店"
+  },
+  "c1vcofyvy7q4": {
+   "openDate": "2022-01-16",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 中目黒店"
+  },
+  "vmbke2o40": {
+   "openDate": "2025-02-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 青山店"
+  },
+  "kj88og5b3fn": {
+   "openDate": "2013-11-22",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム BIGBOX高田馬場(Emio-Style-)店"
+  },
+  "liekoj5-8i": {
+   "openDate": "2016-07-16",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 飯田橋ラムラ店"
+  },
+  "l8kjoob4g4y": {
+   "openDate": "2025-06-20",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 四谷三丁目店"
+  },
+  "3teh9v_55": {
+   "openDate": "2023-06-30",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 新宿サブナード店"
+  },
+  "fubobp8pp": {
+   "openDate": "2022-12-14",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 南砂町SUNAMO店"
+  },
+  "myys47pa7mjy": {
+   "openDate": "2024-09-01",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 木場イトーヨーカドー店"
+  },
+  "vsl7v91tgv": {
+   "openDate": "2024-03-25",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム シャポー小岩店"
+  },
+  "52by_99fc00x": {
+   "openDate": "2021-11-18",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム グレンデール麻布店"
+  },
+  "vcf216xgs": {
+   "openDate": "2025-04-16",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 東京タワー店"
+  },
+  "yb3vpv50hn": {
+   "openDate": "2024-05-05",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 三田店"
+  },
+  "3blvqbz32": {
+   "openDate": "2007-04-20",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 港北センター北ノースポートモール店"
+  },
+  "cy4nbj0xb": {
+   "openDate": "2018-10-23",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム 港北センター南サウスウッド店 "
+  },
+  "ll9-5bqo9td5": {
+   "openDate": "2019-06-28",
+   "acquiredDate": "",
+   "note": "",
+   "source": "lease",
+   "label": "サーティワンアイスクリーム シャポー市川店"
+  }
+ }
+}
