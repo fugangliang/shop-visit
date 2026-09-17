@@ -5,7 +5,7 @@
  */
 'use strict';
 
-const APP_VERSION = 'v2026-09-17.1';
+const APP_VERSION = 'v2026-09-17.2';
 const API = 'https://hiiragi-hd.jp/wp-json/microcms-cache/v1/data/';
 const MASTER_TTL_MS = 24 * 3600 * 1000;
 const EXPORT_FORMAT = 'shop-visit-records-v1';
@@ -34,39 +34,6 @@ const BASIC = {
   companions: ['単独', 'HD社長', '事業会社社長・役員', 'SV・部長', 'その他'],
   purposes: ['定期巡回', '新店・改装確認', '課題フォロー', 'PJ関連（リブランディング・統合・再建）', 'ベンチマーク（他社）'],
 };
-const OBSERVE = [
-  { key: 'traffic',  label: '客数・混雑', tags: ['満席・待ち', '賑わい', '普通', '閑散', '客層:ファミリー', '客層:シニア', '客層:若年', '客層:ビジネス', '客層:単身', '客層:インバウンド'] },
-  { key: 'q',        label: 'Q 商品',     tags: ['味', '提供時間', '盛付・温度', '欠品', '新商品・季節品の訴求'] },
-  { key: 's',        label: 'S 接客・オペ', tags: ['挨拶', '笑顔・態度', '提供スピード', 'オーダー精度', 'レジ・モバイルオーダー対応', 'ピーク時の回し'] },
-  { key: 'c',        label: 'C 清潔・外観', tags: ['客席', '厨房見え', 'トイレ', '外観・看板', 'ファサード照明', '臭い'] },
-  { key: 'staff',    label: '人員',       tags: ['店長在店', '人数:不足', '人数:適正', '人数:過剰', '外国人スタッフ比率高', '新人多い'] },
-  { key: 'promo',    label: '販促・価格', tags: ['POP・掲示物', '季節メニュー', '価格表示', 'SNS・アプリ導線', '値上げの受容感'] },
-  { key: 'site',     label: '立地・商環境', tags: ['施設人流:多', '施設人流:普通', '施設人流:少', '隣接テナント変化', '競合の新規出店', '駐車場・アクセス'] },
-  { key: 'facility', label: '設備',       tags: ['老朽化', '故障・修繕要', 'レイアウト課題'] },
-];
-const TALK = {
-  roles: ['店長', '社員', 'アルバイト', 'SV', '事業会社役員', '施設側担当'],
-  themes: ['人手不足・採用', 'シフト・労働時間', '売上感', '原価・ロス', '客数・客層変化', 'クレーム', '設備', '本部・仕組みへの要望', 'PJへの反応', 'モチベーション・離職懸念'],
-  mood: [
-    { key: 'up',   label: '前向き' },
-    { key: 'flat', label: '普通' },
-    { key: 'down', label: '不満・疲弊' },
-  ],
-};
-const ISSUE = {
-  judge: [
-    { key: 'good',  label: '良好事例（横展開候補）' },
-    { key: 'store', label: '要改善・店舗対応' },
-    { key: 'hq',    label: '要改善・本部・仕組み' },
-    { key: 'check', label: '要確認（事実未確認）' },
-  ],
-  priority: [
-    { key: 'high', label: '高' },
-    { key: 'mid',  label: '中' },
-    { key: 'low',  label: '低' },
-  ],
-  to: ['HD', '事業会社', 'SV', '施設側'],
-};
 const PHOTO_TAGS = ['外観', '店内', 'メニュー・POP', '課題箇所', 'その他'];
 const PREFS = ['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
 
@@ -75,7 +42,7 @@ let _db;
 function openDB() {
   return new Promise((res, rej) => {
     if (_db) return res(_db);
-    const rq = indexedDB.open('shop-visit', 1);
+    const rq = indexedDB.open('shop-visit', 2);
     rq.onupgradeneeded = () => {
       const d = rq.result;
       if (!d.objectStoreNames.contains('visits')) {
@@ -88,6 +55,7 @@ function openDB() {
         st.createIndex('companyId', 'companyId');
       }
       if (!d.objectStoreNames.contains('meta')) d.createObjectStore('meta', { keyPath: 'key' });
+      if (!d.objectStoreNames.contains('store_meta')) d.createObjectStore('store_meta', { keyPath: 'shopId' }); // オープン日等（マスター更新で消えない）
     };
     rq.onsuccess = () => { _db = rq.result; res(_db); };
     rq.onerror = () => rej(rq.error);
@@ -184,24 +152,25 @@ async function refreshMasterIfStale() {
 
 /* ---------- 状態 ---------- */
 const S = {
-  tab: 'visit', master: null, masterErr: null, stores: [], visits: [], meta: {},
-  shop: null, draft: null, open: { basic: true, observe: false, talk: false, issue: false, photos: false },
+  tab: 'visit', master: null, masterErr: null, stores: [], visits: [], meta: {}, storeMeta: {},
+  shop: null, draft: null,
   q: '', fCompany: null, fBrand: null, fPref: null, sortStale: false, limit: PAGE, covOpen: false,
   addingManual: false, photoTag: '店内',
-  recFilterCo: null, recFilterJudge: null,
+  recFilterCo: null,
 };
 
+function openDateOf(shopId) { return (S.storeMeta[shopId] || {}).openDate || ''; }
+async function setOpenDate(shopId, openDate) {
+  const rec = { ...(S.storeMeta[shopId] || {}), shopId, openDate: openDate || '' };
+  S.storeMeta[shopId] = rec;
+  await dbPut('store_meta', rec);
+}
 function newDraft(shop) {
-  const observe = {};
-  OBSERVE.forEach(a => { observe[a.key] = { r: null, tags: [] }; });
   return {
     ts: new Date().toISOString(),
     shopId: shop.id, shopName: shop.name, brand: shop.brandNames[0] || '', brands: [...shop.brandNames],
-    company: shop.companyName, pref: shop.pref, manual: !!shop.manual,
+    company: shop.companyName, pref: shop.pref, manual: !!shop.manual, openDate: openDateOf(shop.id),
     basic: { slot: null, mode: null, companions: [], purposes: [], meal: { items: '', priceJudge: null } },
-    observe,
-    talk: { roles: [], themes: [], mood: null, memo: '' },
-    issue: { judge: null, priority: null, to: [], due: '', memo: '' },
     memo: '', photos: [],
   };
 }
@@ -232,8 +201,7 @@ function toLocalInput(ts) {
 }
 const daysSince = (ts) => Math.floor((Date.now() - Date.parse(ts)) / 86400000);
 const labelOf = (list, key) => (list.find(x => x.key === key) || {}).label || '';
-const JUDGE_SHORT = { good: '良好', store: '要改善(店)', hq: '要改善(本部)', check: '要確認' };
-const judgeShort = (k) => JUDGE_SHORT[k] || '';
+const fmtDate = (d) => d ? d.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$1/$2/$3') : '';
 const norm = (s) => (s || '').normalize('NFKC').toLowerCase().replace(/\s+/g, '');
 
 function shrinkImage(file) {
@@ -363,20 +331,34 @@ function renderVisit(root) {
   search.oninput = () => { S.q = search.value; S.limit = PAGE; renderList(); };
   root.append(search);
 
+  // 絞り込み（ドロップダウン: ①都道府県 ②業態 ③法人）。各選択肢は他2つの選択で絞った店舗から件数付きで作る
   const filters = el('div', 'filters');
-  const companies = S.master ? S.master.companies.map(c => c.name) : [...new Set(S.stores.map(s => s.companyName))];
-  chipRow(filters, null, companies, () => S.fCompany, v => { S.fCompany = v; S.fBrand = null; S.fPref = null; S.limit = PAGE; }, { small: true, noLabel: true });
-  if (S.fCompany) {
-    const coId = (S.master ? S.master.companies.find(c => c.name === S.fCompany) || {} : {}).id;
-    let brands = S.master ? S.master.brands.filter(b => b.companyIds.includes(coId)).map(b => b.name) : [];
-    if (!brands.length) brands = [...new Set(S.stores.filter(s => s.companyName === S.fCompany).flatMap(s => s.brandNames))];
-    chipRow(filters, null, brands, () => S.fBrand, v => { S.fBrand = v; S.fPref = null; S.limit = PAGE; }, { small: true, noLabel: true });
-  }
-  const base = S.stores.filter(s => (!S.fCompany || s.companyName === S.fCompany) && (!S.fBrand || s.brandNames.includes(S.fBrand)));
-  const prefCount = {};
-  base.forEach(s => { if (s.pref) prefCount[s.pref] = (prefCount[s.pref] || 0) + 1; });
-  const prefOpts = PREFS.filter(p => prefCount[p]).map(p => ({ key: p, label: `${p} ${prefCount[p]}` }));
-  if (prefOpts.length > 1) chipRow(filters, null, prefOpts, () => S.fPref, v => { S.fPref = v; S.limit = PAGE; }, { small: true, noLabel: true });
+  const match = (s, { pref = S.fPref, brand = S.fBrand, co = S.fCompany } = {}) =>
+    (!pref || s.pref === pref) && (!brand || s.brandNames.includes(brand)) && (!co || s.companyName === co);
+  const countBy = (pick, opts) => {
+    const c = {};
+    S.stores.filter(x => match(x, opts)).forEach(x => pick(x).forEach(k => { if (k) c[k] = (c[k] || 0) + 1; }));
+    return c;
+  };
+  const dropdown = (label, values, counts, get, set) => {
+    const sel = el('select', 'dd');
+    const o0 = el('option', null, label); o0.value = ''; sel.append(o0);
+    values.forEach(v => { const o = el('option', null, `${v}（${counts[v]}）`); o.value = v; if (get() === v) o.selected = true; sel.append(o); });
+    sel.onchange = () => { set(sel.value || null); S.limit = PAGE; render(); };
+    return sel;
+  };
+  const prefCounts = countBy(x => [x.pref], { pref: null });
+  const brandCounts = countBy(x => x.brandNames, { brand: null });
+  const coCounts = countBy(x => [x.companyName], { co: null });
+  const brandOrder = S.master ? S.master.brands.map(b => b.name) : [];
+  const coOrder = S.master ? S.master.companies.map(c => c.name) : [];
+  const ordered = (order, counts) => [...order.filter(k => counts[k]), ...Object.keys(counts).filter(k => !order.includes(k))];
+  filters.append(
+    dropdown('① 都道府県: すべて', PREFS.filter(p => prefCounts[p]).concat(Object.keys(prefCounts).filter(p => !PREFS.includes(p))), prefCounts, () => S.fPref, v => { S.fPref = v; }),
+    dropdown('② 業態: すべて', ordered(brandOrder, brandCounts), brandCounts, () => S.fBrand, v => { S.fBrand = v; }),
+    dropdown('③ 法人: すべて', ordered(coOrder, coCounts), coCounts, () => S.fCompany, v => { S.fCompany = v; }),
+  );
+  const base = S.stores.filter(x => match(x));
   const sortBtn = el('button', 'chip small' + (S.sortStale ? ' on' : ''), '経過日数が長い順');
   sortBtn.onclick = () => { S.sortStale = !S.sortStale; render(); };
   const sw = el('div', 'chips'); sw.append(sortBtn);
@@ -395,7 +377,8 @@ function renderVisit(root) {
     const b = el('button', 'shop-row');
     b.append(document.createTextNode(s.label + (s.manual ? '（手入力）' : '')));
     const sub = el('span', 'sub');
-    const parts = [s.companyName, s.pref].filter(Boolean).join(' · ');
+    const od = openDateOf(s.id);
+    const parts = [s.companyName, s.pref, od ? '開店 ' + fmtDate(od) : ''].filter(Boolean).join(' · ');
     sub.append(document.createTextNode(parts + (parts ? ' · ' : '')));
     const v = idx[s.id];
     if (v) {
@@ -403,14 +386,14 @@ function renderVisit(root) {
       sub.append(Object.assign(el('span', dsn > 90 ? 'stale' : 'fresh', `最終訪問 ${dsn}日前（${v.count}回）`)));
     } else sub.append(el('span', 'stale', '未訪問'));
     b.append(sub);
-    b.onclick = () => { S.shop = s; S.draft = newDraft(s); S.open = { basic: true, observe: false, talk: false, issue: false, photos: false }; window.scrollTo(0, 0); render(); };
+    b.onclick = () => { S.shop = s; S.draft = newDraft(s); window.scrollTo(0, 0); render(); };
     return b;
   };
 
   function renderList() {
     listWrap.textContent = '';
     const q = norm(S.q);
-    let list = base.filter(s => !S.fPref || s.pref === S.fPref);
+    let list = base;
     if (q) list = list.filter(s => norm(s.label + s.address + s.pref + s.companyName).includes(q));
     if (S.sortStale) {
       list = [...list].sort((a, b) => {
@@ -452,7 +435,7 @@ function renderManualAdd(root) {
   bar.append(back, el('h1', null, '店舗を手入力で追加'));
   root.append(bar);
   const card = el('div', 'card');
-  const m = S.manualDraft || (S.manualDraft = { name: '', brand: '', company: '', pref: '', address: '' });
+  const m = S.manualDraft || (S.manualDraft = { name: '', brand: '', company: '', pref: '', address: '', openDate: '' });
   const field = (label, key, placeholder, listId) => {
     card.append(el('div', 'field-label', label));
     const i = el('input'); i.type = 'text'; i.placeholder = placeholder || ''; i.value = m[key];
@@ -476,6 +459,10 @@ function renderManualAdd(root) {
   sel.onchange = () => { m.pref = sel.value; };
   card.append(sel);
   field('住所・場所メモ', 'address', '任意');
+  card.append(el('div', 'field-label', 'オープン日（任意）'));
+  const od = el('input'); od.type = 'date'; od.value = m.openDate;
+  od.onchange = () => { m.openDate = od.value; };
+  card.append(od);
   const save = el('button', 'save-btn', '追加して記録に進む');
   save.onclick = async () => {
     if (!m.name.trim()) { toast('店名を入れてください'); return; }
@@ -486,8 +473,9 @@ function renderManualAdd(root) {
     };
     await dbPut('stores', s);
     S.stores.push(s);
+    if (m.openDate) await setOpenDate(s.id, m.openDate);
     S.manualDraft = null; S.addingManual = false;
-    S.shop = s; S.draft = newDraft(s); S.open = { basic: true, observe: false, talk: false, issue: false, photos: false };
+    S.shop = s; S.draft = newDraft(s);
     toast('店舗を追加しました');
     render();
   };
@@ -501,7 +489,7 @@ function renderForm(root) {
   const bar = el('div', 'backbar');
   const back = el('button', null, '←');
   back.onclick = () => {
-    const dirty = d.memo || d.photos.length || d.talk.memo || d.issue.memo || d.basic.slot || d.basic.mode;
+    const dirty = d.memo || d.photos.length || d.basic.slot || d.basic.mode || d.basic.companions.length || d.basic.purposes.length || d.basic.meal.items;
     if (dirty && !confirm('入力内容を破棄して戻りますか？')) return;
     S.shop = null; S.draft = null; render();
   };
@@ -510,119 +498,74 @@ function renderForm(root) {
   const info = [s.companyName, s.pref + s.address, s.business_hours ? '営業 ' + s.business_hours : ''].filter(Boolean).join(' · ');
   root.append(el('div', 'shop-info', info));
 
+  // 店舗属性: オープン日（店舗ごとに保持・マスター更新で消えない）
+  const attr = el('div', 'card');
+  const odRow = el('div', 'row');
+  const odLbl = el('div', 'field-label', 'オープン日'); odLbl.style.flex = '0 0 auto'; odLbl.style.marginTop = '0';
+  const od = el('input'); od.type = 'date'; od.value = openDateOf(s.id); od.style.marginTop = '0';
+  od.onchange = async () => { await setOpenDate(s.id, od.value); d.openDate = od.value; toast(od.value ? 'オープン日を保存: ' + fmtDate(od.value) : 'オープン日を削除'); };
+  odRow.append(odLbl, od);
+  attr.append(odRow);
+  const odv = openDateOf(s.id);
+  if (odv) attr.append(el('div', 'set-note', `開店から ${daysSince(odv)} 日`));
+
   // 過去の訪問（複数回訪問の履歴）
   const past = S.visits.filter(v => v.shopId === s.id).sort((a, b) => b.ts.localeCompare(a.ts));
   const hist = el('div', 'history');
   if (past.length) {
-    hist.append(document.createTextNode(`過去の訪問 ${past.length}回: `));
-    past.slice(0, 4).forEach(v => hist.append(el('span', null, fmtTs(v.ts).slice(0, -6) + (v.issue && v.issue.judge ? ' ' + judgeShort(v.issue.judge) : ''))));
-    if (past.length > 4) hist.append(el('span', null, '…'));
+    hist.append(el('div', null, `過去の訪問 ${past.length}回（今回は ${past.length + 1}回目）`));
+    past.forEach(v => hist.append(el('span', null, fmtTs(v.ts) + (v.basic && v.basic.slot ? ' ' + labelOf(BASIC.slot, v.basic.slot) : ''))));
   } else hist.append(document.createTextNode('初回訪問'));
-  root.append(hist);
+  attr.append(hist);
+  root.append(attr);
 
-  const section = (key, title, doneText, build) => {
-    const dt = el('details', 'sec'); dt.open = !!S.open[key];
-    const sm = el('summary'); sm.append(el('span', null, title));
-    if (doneText) sm.append(el('span', 'done', doneText));
-    dt.append(sm);
-    const body = el('div', 'body');
-    build(body);
-    dt.append(body);
-    dt.ontoggle = () => { S.open[key] = dt.open; };
-    root.append(dt);
+  // 訪問基本
+  const b = el('div', 'card');
+  b.append(el('div', 'field-label', '訪問日時（同じ店舗に何度でも記録できる）'));
+  const dtIn = el('input'); dtIn.type = 'datetime-local'; dtIn.value = toLocalInput(d.ts);
+  dtIn.onchange = () => { if (dtIn.value) d.ts = new Date(dtIn.value).toISOString(); };
+  b.append(dtIn);
+  chipRow(b, '時間帯', BASIC.slot, () => d.basic.slot, v => { d.basic.slot = v; });
+  chipRow(b, '訪問形態', BASIC.mode, () => d.basic.mode, v => { d.basic.mode = v; });
+  chipRow(b, '同行者（複数可）', BASIC.companions, () => d.basic.companions, v => { d.basic.companions = v; }, { multi: true });
+  chipRow(b, '目的（複数可）', BASIC.purposes, () => d.basic.purposes, v => { d.basic.purposes = v; }, { multi: true });
+  b.append(el('div', 'field-label', '実食（注文品）'));
+  const meal = el('input'); meal.type = 'text'; meal.value = d.basic.meal.items; meal.placeholder = '例: 明太子パスタ 1,280円';
+  meal.oninput = () => { d.basic.meal.items = meal.value; };
+  b.append(meal);
+  chipRow(b, '価格妥当性', RATINGS, () => d.basic.meal.priceJudge, v => { d.basic.meal.priceJudge = v; }, { rate: true });
+  root.append(b);
+
+  // 写真
+  const pc = el('div', 'card');
+  chipRow(pc, '写真（次に撮る写真のタグ）', PHOTO_TAGS, () => S.photoTag, v => { S.photoTag = v || '店内'; }, { small: true });
+  const strip = el('div', 'photo-strip');
+  d.photos.forEach(ph => {
+    const w = el('div', 'del-photo');
+    const img = el('img'); img.src = ph.data;
+    const x = el('span', 'x', '×');
+    x.onclick = () => { d.photos = d.photos.filter(q => q.id !== ph.id); render(); };
+    w.append(img, x, el('div', null, ph.tag || ''));
+    strip.append(w);
+  });
+  const add = el('button', 'add-photo', '＋');
+  const file = el('input'); file.type = 'file'; file.accept = 'image/*'; file.capture = 'environment'; file.hidden = true;
+  file.onchange = async () => {
+    if (!file.files.length) return;
+    try {
+      const data = await shrinkImage(file.files[0]);
+      d.photos.push({ id: uid(), tag: S.photoTag, data });
+      render();
+    } catch { toast('写真の取込に失敗'); }
   };
+  add.onclick = () => file.click();
+  strip.append(add, file);
+  pc.append(strip);
+  root.append(pc);
 
-  // A. 訪問基本
-  const basicDone = [labelOf(BASIC.slot, d.basic.slot), labelOf(BASIC.mode, d.basic.mode), ...d.basic.companions].filter(Boolean).join('・');
-  section('basic', 'A 訪問基本', basicDone, (b) => {
-    b.append(el('div', 'field-label', '訪問日時（同じ店舗に何度でも記録できる）'));
-    const dtIn = el('input'); dtIn.type = 'datetime-local'; dtIn.value = toLocalInput(d.ts);
-    dtIn.onchange = () => { if (dtIn.value) d.ts = new Date(dtIn.value).toISOString(); };
-    b.append(dtIn);
-    chipRow(b, '時間帯', BASIC.slot, () => d.basic.slot, v => { d.basic.slot = v; });
-    chipRow(b, '訪問形態', BASIC.mode, () => d.basic.mode, v => { d.basic.mode = v; });
-    chipRow(b, '同行者（複数可）', BASIC.companions, () => d.basic.companions, v => { d.basic.companions = v; }, { multi: true });
-    chipRow(b, '目的（複数可）', BASIC.purposes, () => d.basic.purposes, v => { d.basic.purposes = v; }, { multi: true });
-    b.append(el('div', 'field-label', '実食（注文品）'));
-    const meal = el('input'); meal.type = 'text'; meal.value = d.basic.meal.items; meal.placeholder = '例: 明太子パスタ 1,280円';
-    meal.oninput = () => { d.basic.meal.items = meal.value; };
-    b.append(meal);
-    chipRow(b, '価格妥当性', RATINGS, () => d.basic.meal.priceJudge, v => { d.basic.meal.priceJudge = v; }, { rate: true });
-  });
-
-  // B. 観察
-  const obsDone = OBSERVE.filter(a => d.observe[a.key].r).map(a => a.label.split(' ')[0] + labelOf(RATINGS, d.observe[a.key].r)).join(' ');
-  section('observe', 'B 観察（◎○△＋補足）', obsDone, (b) => {
-    OBSERVE.forEach(a => {
-      const ax = el('div', 'axis');
-      const head = el('div', 'axis-head');
-      head.append(el('span', 'name', a.label));
-      chipRow(head, null, RATINGS, () => d.observe[a.key].r, v => { d.observe[a.key].r = v; }, { rate: true, noLabel: true });
-      ax.append(head);
-      chipRow(ax, null, a.tags, () => d.observe[a.key].tags, v => { d.observe[a.key].tags = v; }, { multi: true, small: true, noLabel: true });
-      b.append(ax);
-    });
-  });
-
-  // C. 対話
-  const talkDone = [...d.talk.roles, labelOf(TALK.mood, d.talk.mood)].filter(Boolean).join('・');
-  section('talk', 'C 対話（店長・スタッフ）', talkDone, (b) => {
-    chipRow(b, '相手（複数可）', TALK.roles, () => d.talk.roles, v => { d.talk.roles = v; }, { multi: true });
-    chipRow(b, 'テーマ（複数可）', TALK.themes, () => d.talk.themes, v => { d.talk.themes = v; }, { multi: true });
-    chipRow(b, '温度感', TALK.mood, () => d.talk.mood, v => { d.talk.mood = v; });
-    b.append(el('div', 'field-label', '発言要旨（役職まで・氏名は書かない）'));
-    const ta = el('textarea'); ta.value = d.talk.memo;
-    ta.oninput = () => { d.talk.memo = ta.value; };
-    b.append(ta);
-  });
-
-  // D. 課題・アクション
-  const issueDone = [labelOf(ISSUE.judge, d.issue.judge), d.issue.priority ? '重要度' + labelOf(ISSUE.priority, d.issue.priority) : ''].filter(Boolean).join('・');
-  section('issue', 'D 課題・アクション', issueDone, (b) => {
-    chipRow(b, '判定', ISSUE.judge, () => d.issue.judge, v => { d.issue.judge = v; }, { warn: true });
-    chipRow(b, '重要度', ISSUE.priority, () => d.issue.priority, v => { d.issue.priority = v; });
-    chipRow(b, '宛先（複数可）', ISSUE.to, () => d.issue.to, v => { d.issue.to = v; }, { multi: true });
-    b.append(el('div', 'field-label', 'フォロー期限（任意）'));
-    const due = el('input'); due.type = 'date'; due.value = d.issue.due;
-    due.onchange = () => { d.issue.due = due.value; };
-    b.append(due);
-    b.append(el('div', 'field-label', '論点メモ'));
-    const ta = el('textarea'); ta.value = d.issue.memo;
-    ta.oninput = () => { d.issue.memo = ta.value; };
-    b.append(ta);
-  });
-
-  // E. 写真
-  section('photos', 'E 写真', d.photos.length ? `${d.photos.length}枚` : '', (b) => {
-    chipRow(b, '次に撮る写真のタグ', PHOTO_TAGS, () => S.photoTag, v => { S.photoTag = v || '店内'; }, { small: true });
-    const strip = el('div', 'photo-strip');
-    d.photos.forEach(ph => {
-      const w = el('div', 'del-photo');
-      const img = el('img'); img.src = ph.data;
-      const x = el('span', 'x', '×');
-      x.onclick = () => { d.photos = d.photos.filter(q => q.id !== ph.id); render(); };
-      w.append(img, x, el('div', null, ph.tag || ''));
-      strip.append(w);
-    });
-    const add = el('button', 'add-photo', '＋');
-    const file = el('input'); file.type = 'file'; file.accept = 'image/*'; file.capture = 'environment'; file.hidden = true;
-    file.onchange = async () => {
-      if (!file.files.length) return;
-      try {
-        const data = await shrinkImage(file.files[0]);
-        d.photos.push({ id: uid(), tag: S.photoTag, data });
-        S.open.photos = true;
-        render();
-      } catch { toast('写真の取込に失敗'); }
-    };
-    add.onclick = () => file.click();
-    strip.append(add, file);
-    b.append(strip);
-  });
-
-  // 全体メモ・保存
+  // メモ・保存
   const card = el('div', 'card');
-  card.append(el('div', 'field-label', 'メモ（全体所感・その他）'));
+  card.append(el('div', 'field-label', 'メモ（所感・その他）'));
   const ta = el('textarea'); ta.value = d.memo;
   ta.oninput = () => { d.memo = ta.value; };
   card.append(ta);
@@ -641,11 +584,6 @@ function renderForm(root) {
 }
 
 /* ---------- 描画: 記録タブ ---------- */
-function summarizeRates(r) {
-  const out = [];
-  OBSERVE.forEach(a => { const o = (r.observe || {})[a.key]; if (o && o.r) out.push({ label: a.label.split(' ')[0], r: o.r }); });
-  return out;
-}
 function renderRecords(root) {
   root.append(el('h1', null, `記録（${S.visits.length}件）`));
   if (!S.visits.length) {
@@ -655,38 +593,26 @@ function renderRecords(root) {
   const filters = el('div', 'filters');
   const cos = [...new Set(S.visits.map(v => v.company).filter(Boolean))];
   if (cos.length > 1) chipRow(filters, null, cos, () => S.recFilterCo, v => { S.recFilterCo = v; }, { small: true, noLabel: true });
-  chipRow(filters, null, ISSUE.judge.map(j => ({ key: j.key, label: judgeShort(j.key) })), () => S.recFilterJudge, v => { S.recFilterJudge = v; }, { small: true, noLabel: true });
   root.append(filters);
 
-  const list = S.visits.filter(v => (!S.recFilterCo || v.company === S.recFilterCo) && (!S.recFilterJudge || (v.issue || {}).judge === S.recFilterJudge));
+  const list = S.visits.filter(v => !S.recFilterCo || v.company === S.recFilterCo);
   [...list].sort((a, b) => b.ts.localeCompare(a.ts)).forEach(r => {
     const c = el('div', 'rec');
     const head = el('div', 'head');
-    const jd = (r.issue || {}).judge;
     head.append(el('span', null, fmtTs(r.ts) + (r.basic && r.basic.slot ? ' ' + labelOf(BASIC.slot, r.basic.slot) : '')));
-    if (jd) head.append(el('span', 'judge-tag judge-' + jd, judgeShort(jd)));
+    const od = openDateOf(r.shopId) || r.openDate;
+    if (od) head.append(el('span', null, '開店 ' + fmtDate(od)));
     c.append(head);
     const loc = el('div', 'loc');
     if (r.brand) loc.append(el('span', 'brand-tag', r.brand));
     loc.append(document.createTextNode(r.shopName + (r.company ? `（${r.company}）` : '')));
     c.append(loc);
-    const rates = summarizeRates(r);
-    if (rates.length) {
-      const rw = el('div', 'rates');
-      rates.forEach(x => { const b = el('b', x.r, x.label + labelOf(RATINGS, x.r)); rw.append(b); });
-      c.append(rw);
-    }
-    const tagBits = [];
-    if (r.basic) { tagBits.push(labelOf(BASIC.mode, r.basic.mode), ...(r.basic.companions || []), ...(r.basic.purposes || [])); }
-    OBSERVE.forEach(a => { const o = (r.observe || {})[a.key]; if (o && o.tags.length) tagBits.push(...o.tags); });
-    if (r.talk) tagBits.push(...(r.talk.roles || []), ...(r.talk.themes || []), labelOf(TALK.mood, r.talk.mood));
-    const bits = tagBits.filter(Boolean);
-    if (bits.length) c.append(el('div', 'tags', bits.join('・')));
+    const bits = [];
+    if (r.basic) bits.push(labelOf(BASIC.mode, r.basic.mode), ...(r.basic.companions || []), ...(r.basic.purposes || []));
+    const b2 = bits.filter(Boolean);
+    if (b2.length) c.append(el('div', 'tags', b2.join('・')));
     if (r.basic && r.basic.meal && r.basic.meal.items) c.append(el('div', 'memo', '実食: ' + r.basic.meal.items + (r.basic.meal.priceJudge ? ' ' + labelOf(RATINGS, r.basic.meal.priceJudge) : '')));
-    const memoBlock = (label, text) => { if (!text) return; const m = el('div', 'memo'); m.append(el('b', null, label + ' '), document.createTextNode(text)); c.append(m); };
-    memoBlock('対話', (r.talk || {}).memo);
-    memoBlock('論点', (r.issue || {}).memo + ((r.issue || {}).to && r.issue.to.length ? `（宛先: ${r.issue.to.join('・')}${r.issue.due ? ' 期限' + r.issue.due : ''}）` : ''));
-    memoBlock('', r.memo);
+    if (r.memo) c.append(el('div', 'memo', r.memo));
     if (r.photos && r.photos.length) {
       const th = el('div', 'thumbs');
       r.photos.forEach(p => { if (p.data) { const i = el('img'); i.src = p.data; i.title = p.tag || ''; th.append(i); } });
@@ -718,7 +644,7 @@ function renderSettings(root) {
     try { const mm = await fetchMaster(); toast(`${mm.counts.shop}店を取得`); S.masterErr = null; render(); }
     catch (e) { toast('取得失敗: ' + e.message); fetchBtn.disabled = false; }
   };
-  b1.append(fetchBtn, el('div', 'set-note', '起動時に24時間経過していれば自動更新。閉店で公式から消えた店舗の記録は店名を保持したまま残る。'));
+  b1.append(fetchBtn, el('div', 'set-note', `起動時に24時間経過していれば自動更新。閉店で公式から消えた店舗の記録は店名を保持したまま残る。オープン日は各店舗の記録画面で入力（登録済 ${Object.values(S.storeMeta).filter(m => m.openDate).length}店・マスター更新でも保持）。`));
   const manual = S.stores.filter(s => s.manual);
   if (manual.length) {
     b1.append(el('div', 'field-label', `手入力店舗（${manual.length}）`));
@@ -759,7 +685,9 @@ function renderSettings(root) {
       let n = 0;
       for (const r of j.records || []) { await dbPut('visits', r); n++; }
       for (const s of j.manual_stores || []) { await dbPut('stores', s); }
+      for (const m of j.store_meta || []) { if (m && m.shopId) await dbPut('store_meta', m); }
       S.visits = await dbAll('visits'); S.stores = await dbAll('stores');
+      S.storeMeta = Object.fromEntries((await dbAll('store_meta')).map(m => [m.shopId, m]));
       toast(`${n}件をマージ取込`);
       render();
     } catch (e) { toast('取込失敗: ' + e.message); }
@@ -795,6 +723,7 @@ async function exportJSON(mode) {
     range: { since, until: now },
     records: recs,
     manual_stores: S.stores.filter(s => s.manual),
+    store_meta: Object.values(S.storeMeta),
   };
   const json = JSON.stringify(payload, null, 1);
   if (mode === 'text') {
@@ -839,8 +768,9 @@ document.querySelectorAll('.nav button').forEach(b => {
 
 (async function init() {
   render(); // 先に描画（IndexedDB読込を待たない）
-  const [visits, stores, master, lastExp] = await Promise.all([dbAll('visits'), dbAll('stores'), dbGet('meta', 'master'), dbGet('meta', 'lastExportAt')]);
+  const [visits, stores, master, lastExp, sm] = await Promise.all([dbAll('visits'), dbAll('stores'), dbGet('meta', 'master'), dbGet('meta', 'lastExportAt'), dbAll('store_meta')]);
   S.visits = visits; S.stores = stores; S.master = master || null;
+  S.storeMeta = Object.fromEntries(sm.map(m => [m.shopId, m]));
   S.meta.lastExportAt = lastExp ? lastExp.value : null;
   render();
   refreshMasterIfStale();
