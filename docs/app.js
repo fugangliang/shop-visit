@@ -5,7 +5,7 @@
  */
 'use strict';
 
-const APP_VERSION = 'v2026-09-17.3';
+const APP_VERSION = 'v2026-09-18.1';
 const API = 'https://hiiragi-hd.jp/wp-json/microcms-cache/v1/data/';
 const MASTER_TTL_MS = 24 * 3600 * 1000;
 const EXPORT_FORMAT = 'shop-visit-records-v1';
@@ -184,7 +184,7 @@ async function setOpenDate(shopId, openDate) {
 }
 function newDraft(shop) {
   return {
-    ts: new Date().toISOString(),
+    ts: new Date().toISOString(), tsUnknown: false, tsApprox: '',   // tsUnknown=true のとき ts は保存時刻（並び順用）で訪問日時ではない
     shopId: shop.id, shopName: shop.name, brand: shop.brandNames[0] || '', brands: [...shop.brandNames],
     company: shop.companyName, pref: shop.pref, manual: !!shop.manual, openDate: openDateOf(shop.id),
     basic: { slot: null, mode: null, companions: [], purposes: [], meal: { items: '', priceJudge: null } },
@@ -217,6 +217,7 @@ function toLocalInput(ts) {
   return `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}T${p2(d.getHours())}:${p2(d.getMinutes())}`;
 }
 const daysSince = (ts) => Math.floor((Date.now() - Date.parse(ts)) / 86400000);
+const fmtVisit = (v) => v.tsUnknown ? '日時不明' + (v.tsApprox ? `（${v.tsApprox}）` : '') : fmtTs(v.ts);
 const labelOf = (list, key) => (list.find(x => x.key === key) || {}).label || '';
 const fmtDate = (d) => d ? d.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$1/$2/$3') : '';
 const norm = (s) => (s || '').normalize('NFKC').toLowerCase().replace(/\s+/g, '');
@@ -270,7 +271,7 @@ function visitIndex() {
   const idx = {};
   S.visits.forEach(v => {
     const c = idx[v.shopId] || (idx[v.shopId] = { count: 0, lastTs: '' });
-    c.count++; if (v.ts > c.lastTs) c.lastTs = v.ts;
+    c.count++; if (!v.tsUnknown && v.ts > c.lastTs) c.lastTs = v.ts;
   });
   return idx;
 }
@@ -281,7 +282,7 @@ function coverage(idx) {
     const bn = s.brandNames[0] || '（ブランド未設定）';
     const b = co.brands[bn] || (co.brands[bn] = { total: 0, visited: 0, stale: 0 });
     co.total++; b.total++;
-    if (idx[s.id]) { co.visited++; b.visited++; if (daysSince(idx[s.id].lastTs) > 90) b.stale++; }
+    if (idx[s.id]) { co.visited++; b.visited++; if (idx[s.id].lastTs && daysSince(idx[s.id].lastTs) > 90) b.stale++; }
   });
   const ids = new Set(S.stores.map(s => s.id));
   const outside = new Set(S.visits.filter(v => !ids.has(v.shopId)).map(v => v.shopId)).size;
@@ -398,10 +399,11 @@ function renderVisit(root) {
     const parts = [s.companyName, s.pref, od ? '開店 ' + fmtDate(od) : ''].filter(Boolean).join(' · ');
     sub.append(document.createTextNode(parts + (parts ? ' · ' : '')));
     const v = idx[s.id];
-    if (v) {
+    if (v && v.lastTs) {
       const dsn = daysSince(v.lastTs);
-      sub.append(Object.assign(el('span', dsn > 90 ? 'stale' : 'fresh', `最終訪問 ${dsn}日前（${v.count}回）`)));
-    } else sub.append(el('span', 'stale', '未訪問'));
+      sub.append(el('span', dsn > 90 ? 'stale' : 'fresh', `最終訪問 ${dsn}日前（${v.count}回）`));
+    } else if (v) sub.append(el('span', 'fresh', `訪問済・日時不明（${v.count}回）`));
+    else sub.append(el('span', 'stale', '未訪問'));
     b.append(sub);
     b.onclick = () => { S.shop = s; S.draft = newDraft(s); window.scrollTo(0, 0); render(); };
     return b;
@@ -414,8 +416,8 @@ function renderVisit(root) {
     if (q) list = list.filter(s => norm(s.label + s.address + s.pref + s.companyName).includes(q));
     if (S.sortStale) {
       list = [...list].sort((a, b) => {
-        const la = idx[a.id] ? idx[a.id].lastTs : '', lb = idx[b.id] ? idx[b.id].lastTs : '';
-        return la.localeCompare(lb);
+        const key = (x) => idx[x.id] ? (idx[x.id].lastTs || '1') : '0';   // 未訪問 < 日時不明 < 既知（古い順）
+        return key(a).localeCompare(key(b));
       });
     }
     if (!q && !S.fCompany && !S.fBrand && !S.fPref && !S.sortStale) {
@@ -506,7 +508,7 @@ function renderForm(root) {
   const bar = el('div', 'backbar');
   const back = el('button', null, '←');
   back.onclick = () => {
-    const dirty = d.memo || d.photos.length || d.basic.slot || d.basic.mode || d.basic.companions.length || d.basic.purposes.length || d.basic.meal.items;
+    const dirty = d.memo || d.photos.length || d.tsUnknown || d.basic.slot || d.basic.mode || d.basic.companions.length || d.basic.purposes.length || d.basic.meal.items;
     if (dirty && !confirm('入力内容を破棄して戻りますか？')) return;
     S.shop = null; S.draft = null; render();
   };
@@ -535,7 +537,7 @@ function renderForm(root) {
   const hist = el('div', 'history');
   if (past.length) {
     hist.append(el('div', null, `過去の訪問 ${past.length}回（今回は ${past.length + 1}回目）`));
-    past.forEach(v => hist.append(el('span', null, fmtTs(v.ts) + (v.basic && v.basic.slot ? ' ' + labelOf(BASIC.slot, v.basic.slot) : ''))));
+    past.forEach(v => hist.append(el('span', null, fmtVisit(v) + (v.basic && v.basic.slot ? ' ' + labelOf(BASIC.slot, v.basic.slot) : ''))));
   } else hist.append(document.createTextNode('初回訪問'));
   attr.append(hist);
   root.append(attr);
@@ -543,9 +545,18 @@ function renderForm(root) {
   // 訪問基本
   const b = el('div', 'card');
   b.append(el('div', 'field-label', '訪問日時（同じ店舗に何度でも記録できる）'));
-  const dtIn = el('input'); dtIn.type = 'datetime-local'; dtIn.value = toLocalInput(d.ts);
-  dtIn.onchange = () => { if (dtIn.value) d.ts = new Date(dtIn.value).toISOString(); };
-  b.append(dtIn);
+  if (!d.tsUnknown) {
+    const dtIn = el('input'); dtIn.type = 'datetime-local'; dtIn.value = toLocalInput(d.ts);
+    dtIn.onchange = () => { if (dtIn.value) d.ts = new Date(dtIn.value).toISOString(); };
+    b.append(dtIn);
+  }
+  chipRow(b, null, [{ key: 'unknown', label: '訪問日時不明（行ったことだけ記録）' }], () => (d.tsUnknown ? 'unknown' : null), v => { d.tsUnknown = v === 'unknown'; }, { noLabel: true, small: true });
+  if (d.tsUnknown) {
+    b.append(el('div', 'field-label', 'おおよその時期（任意・例: 2025年春／オープン直後／数年前）'));
+    const ap = el('input'); ap.type = 'text'; ap.value = d.tsApprox; ap.placeholder = '分かる範囲で';
+    ap.oninput = () => { d.tsApprox = ap.value; };
+    b.append(ap);
+  }
   chipRow(b, '時間帯', BASIC.slot, () => d.basic.slot, v => { d.basic.slot = v; });
   chipRow(b, '訪問形態', BASIC.mode, () => d.basic.mode, v => { d.basic.mode = v; });
   chipRow(b, '同行者（複数可）', BASIC.companions, () => d.basic.companions, v => { d.basic.companions = v; }, { multi: true });
@@ -593,6 +604,7 @@ function renderForm(root) {
   const save = el('button', 'save-btn', 'この訪問を保存');
   save.onclick = async () => {
     const rec = { id: uid(), ...JSON.parse(JSON.stringify(d)) };
+    if (rec.tsUnknown) rec.ts = new Date().toISOString();
     await dbPut('visits', rec);
     S.visits.push(rec);
     S.shop = null; S.draft = null;
@@ -620,7 +632,7 @@ function renderRecords(root) {
   [...list].sort((a, b) => b.ts.localeCompare(a.ts)).forEach(r => {
     const c = el('div', 'rec');
     const head = el('div', 'head');
-    head.append(el('span', null, fmtTs(r.ts) + (r.basic && r.basic.slot ? ' ' + labelOf(BASIC.slot, r.basic.slot) : '')));
+    head.append(el('span', null, fmtVisit(r) + (r.basic && r.basic.slot ? ' ' + labelOf(BASIC.slot, r.basic.slot) : '')));
     const od = openDateOf(r.shopId) || r.openDate;
     if (od) head.append(el('span', null, '開店 ' + fmtDate(od)));
     c.append(head);

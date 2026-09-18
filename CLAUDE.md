@@ -57,7 +57,7 @@ IndexedDB `shop-visit` v2: `visits`（keyPath id, index ts/shopId）・`stores`�
   手入力店舗は `id: 'm_…'`, `manual: true`。マスター更新時も残る。
 - 訪問（visits）: 
   ```
-  { id, ts,                                   // ts = 訪問日時（編集可・ISO8601）
+  { id, ts, tsUnknown, tsApprox,              // ts = 訪問日時（編集可・ISO8601）。tsUnknown=true のときは「日時不明」で ts は保存時刻（並び順用）、tsApprox は「2025年春」等の任意文字列
     shopId, shopName, brand, brands[], company, pref, manual, openDate,   // 店舗の非正規化（閉店で参照切れしない）
     basic:   { slot, mode, companions[], purposes[], meal:{items, priceJudge} },
     memo, photos: [{ id, tag, data }] }       // data = 1280px JPEG q0.8 dataURL
@@ -90,6 +90,7 @@ IndexedDB `shop-visit` v2: `visits`（keyPath id, index ts/shopId）・`stores`�
 - v2026-09-17.3 公開。オープン日の既定値 270店を同梱（RF指示: 公式ニュース→さらにDownloadsの店舗マスタ＝賃貸借契約一覧・売上一覧を確認して統合）。
 - v2026-09-17.2: RF指示で (1) 店舗ごとのオープン日（記録画面で入力・store_meta 保持・行と記録に表示・「開店からN日」）、
   (2) 店舗選択を①都道府県 ②業態 ③法人のドロップダウン（相互に絞り込み・件数付き）に変更、(3) 観察・対話・課題の各セクションを削除。
+- v2026-09-18.1: 「訪問日時不明（行ったことだけ記録）」チップを追加（RF指示 2026-09-18）。不明の訪問は回数に数えるが「最終訪問N日前」「90日超」には使わない。店舗行は「訪問済・日時不明（n回）」。
 - 複数回訪問: 1訪問=1レコード。記録画面に「過去の訪問 n回（今回は n+1回目）」と全履歴、店舗行に「最終訪問 N日前（n回）」。
 - [要確認] 分析成果物の保存先フォルダ／オープン日なし7店の日付（上記）／譲受店のオープン日を「当社営業開始日」とするか「前運営者の開店日」とするか（現状は前者＝賃貸借一覧の値）／
   チップ辞書の語彙（実運用1〜2週で見直し）／近隣ソート（v1.1候補: 国土地理院 AddressSearch API・CORS可・キー不要）の要否／iPhone実機未確認。
